@@ -207,16 +207,15 @@ export default {
       });
     },
 
-    checkUserInput: function(event) {
-      event.preventDefault();
+    checkUserInput() {
 
       // reset feedback messages status
       this.isInputEmpty = false;
       this.isInputWrong = false;
       this.isInputCorrect = false;
 
-      // no input digit >> not start, feedback messagge
-      // EMPTY: user has to write something ...
+      // no input digit >> no start, feedback messagge
+      // user has to write something ...
       if (!this.userNumber) {
         this.isInputEmpty = true;
         return false;
