@@ -43,8 +43,10 @@
     )
       h1
         | {{ feedbackTitle }}
-      p
-        | {{ feedbackText }}
+
+      p(
+        v-html='feedbackText'
+      )
 </template>
 
 <script>
@@ -146,7 +148,7 @@ export default {
       this.$modal.show('modal-feedback',{
         feedbackClassname: 'is-modal-correct',
         feedbackTitle: 'Yes !!!',
-        text: `You have answered correctly <b>${this.$store.state.answerCorrect.counter}</b> questions.`,
+        feedbackText: `You have answered correctly <b>${this.$store.state.answerCorrect.counter}</b> questions.`,
       })
     },
 
