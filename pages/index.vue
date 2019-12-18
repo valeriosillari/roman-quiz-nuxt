@@ -41,9 +41,9 @@
       @before-open='overlayBeforeOpen'
       @before-close='overlayBeforeClose'
     )
-      h1
-        | {{ feedbackTitle }}
-
+      h1.feedback-title(
+        v-html='feedbackTitle'
+      )
       p(
         v-html='feedbackText'
       )
@@ -164,7 +164,7 @@ export default {
       this.$modal.show('modal-feedback',{
         feedbackClassname: 'is-modal-game-over',
         feedbackTitle: `Ouch! <b>${MAX_ERRORS_ALOUD}</b> errors.`,
-        feedbackText: 'You have done  too much errors. Game Over.',
+        feedbackText: 'You have done  too many errors. Game Over.',
       })
       // reset game counter
       this.resetCounter();
@@ -243,12 +243,6 @@ export default {
 .v--modal-overlay
   background: #efefef
 
-  &.is-modal-game-over
-    background-color: red
-
-  &.is-modal-end-game
-    background-color: green
-
   .v--modal-box
     padding: 15px
     text-align: center
@@ -256,5 +250,28 @@ export default {
     flex-direction: column
     justify-content: center
     align-items: center
+
+  &.is-modal-error
+    .feedback-title
+      color: red
+
+  &.is-modal-correct
+    .feedback-title
+      color: green
+
+  &.is-modal-game-over,
+  &.is-modal-end-game
+    .v--modal-box
+      color: white
+      background: transparent
+      box-shadow: none
+
+  &.is-modal-game-over
+    background-color: red
+
+  &.is-modal-end-game
+    background-color: green
+
+
 
 </style>
