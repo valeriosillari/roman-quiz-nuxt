@@ -89,6 +89,7 @@ export default {
     resetCounter() {
       this.$store.commit("answerCorrect/reset");
       this.$store.commit("answerWrong/reset");
+      console.log('RESET counter')
     },
 
     updateGuessNumber() {
@@ -158,26 +159,13 @@ export default {
     },
 
     showModalGameOver() {
-      this.overlayType = "is-modal-game-over";
-      this.$modal.show("dialog", {
-        title: `Ops! ${MAX_ERRORS_ALOUD} errors`,
-        text: "You have to study better Roman Numerals ...",
-        buttons: [
-          {
-            class: "btn btn-danger",
-            title: "Start again",
-            // Button click handler
-            handler: () => {
-              // set new random value and move on
-              this.updateGuessNumber();
-              // reset game counter
-              this.resetCounter();
-              // close
-              this.$modal.hide("dialog");
-            }
-          }
-        ]
-      });
+      this.$modal.show('modal-feedback',{
+        feedbackClassname: 'is-modal-game-over',
+        feedbackTitle: `Ouch! <b>${MAX_ERRORS_ALOUD}</b> errors.`,
+        feedbackText: 'You have done  too much errors. Game Over.',
+      })
+      // reset game counter
+      this.resetCounter();
     },
 
     showModalEndGame() {
