@@ -34,10 +34,13 @@
       )
         | Please insert some values in the input field
 
-    v-dialog(
-      v-bind:click-to-close="false"
-      :class='overlayType'
+    //- v-dialog(v-bind:click-to-close="true":class='overlayType')
+    modal(
+      name='modal-feedback'
+      @before-open="beforeOpen"
     )
+      h1
+        | {{ feedbackTitle }}
 </template>
 
 <script>
@@ -58,11 +61,17 @@ export default {
       isInputWrong: false,
       isInputCorrect: false,
       userNumber: null,
-      overlayType: false
+      overlayType: false,
+      feedbackTitle: false,
     };
   },
 
   methods: {
+    beforeOpen (event) {
+      this.feedbackTitle = event.params.feedbackTitle
+      console.log(event.params.feedbackTitle)
+    },
+
     resetCounter() {
       this.$store.commit("answerCorrect/reset");
       this.$store.commit("answerWrong/reset");
@@ -140,6 +149,13 @@ export default {
     },
 
     showModalError() {
+      this.$modal.show('modal-feedback',{
+        feedbackTitle: 'ylo!!!!'
+      })
+
+
+
+
       this.overlayType = "is-modal-error";
       this.$modal.show("dialog", {
         title: `Ops! Error`,
@@ -150,10 +166,11 @@ export default {
             title: "Close and Try Again",
             // Button click handler
             handler: () => {
+              console.log('Error handler')
               // set new random value and move on
-              this.updateGuessNumber();
+              // this.updateGuessNumber();
               // close
-              this.$modal.hide("dialog");
+              // this.$modal.hide("dialog");
             }
           }
         ]
