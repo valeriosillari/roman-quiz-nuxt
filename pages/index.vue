@@ -169,31 +169,16 @@ export default {
     },
 
     showModalEndGame() {
-      this.overlayType = "is-modal-end-game";
-
-      this.$modal.show("dialog", {
-        title: `Good try!`,
-        text: `You have answered correctly <b>${this.$store.state.answerCorrect.counter}</b> of <b>${MAX_ANSWERS}</b> questions!`,
-        buttons: [
-          {
-            class: "btn btn-success",
-            title: "Close and Start Again",
-            // Button click handler
-            handler: () => {
-              // set new random value and move on
-              this.updateGuessNumber();
-              // reset game counter
-              this.resetCounter();
-              // close
-              this.$modal.hide("dialog");
-            }
-          }
-        ]
-      });
+      this.$modal.show('modal-feedback',{
+        feedbackClassname: 'is-modal-end-game',
+        feedbackTitle: 'Good try!',
+        feedbackText: `You have answered correctly <b>${this.$store.state.answerCorrect.counter}</b> of <b>${MAX_ANSWERS}</b> questions!`,
+      })
+      // reset game counter
+      this.resetCounter();
     },
 
     checkUserInput() {
-
       // reset feedback messages status
       this.isInputEmpty = false;
       this.isInputWrong = false;
@@ -210,8 +195,6 @@ export default {
         this.isInputCorrect = true;
         this.$store.commit("answerCorrect/increment");
       } else {
-        // wrong answer anyway, but because digit is ROMAN but NOT the current number
-        // TODO : set better feedback maybe? we wnat to help user, not be mean with him/her
         this.isInputWrong = true;
         this.$store.commit("answerWrong/increment");
       }
