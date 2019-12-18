@@ -37,10 +37,13 @@
     //- v-dialog(v-bind:click-to-close="true":class='overlayType')
     modal(
       name='modal-feedback'
+      :class='feedbackClassname'
       @before-open="beforeOpen"
     )
       h1
         | {{ feedbackTitle }}
+      p
+        | {{ feedbackText }}
 </template>
 
 <script>
@@ -62,14 +65,19 @@ export default {
       isInputCorrect: false,
       userNumber: null,
       overlayType: false,
+
+      feedbackClassname: false,
       feedbackTitle: false,
+      feedbackText: 'mon',
+
     };
   },
 
   methods: {
     beforeOpen (event) {
+      this.feedbackClassname = event.params.feedbackClassname
       this.feedbackTitle = event.params.feedbackTitle
-      console.log(event.params.feedbackTitle)
+      this.feedbackText = event.params.feedbackText
     },
 
     resetCounter() {
@@ -150,31 +158,34 @@ export default {
 
     showModalError() {
       this.$modal.show('modal-feedback',{
-        feedbackTitle: 'ylo!!!!'
+        feedbackClassname: 'is-modal-error',
+        feedbackTitle: 'ylo!!!!',
+        feedbackText: `You have done ${this.$store.state.answerWrong.counter} errors.`,
       })
 
 
 
 
-      this.overlayType = "is-modal-error";
-      this.$modal.show("dialog", {
-        title: `Ops! Error`,
-        text: `You have done ${this.$store.state.answerWrong.counter} errors.`,
-        buttons: [
-          {
-            class: "btn btn-danger",
-            title: "Close and Try Again",
-            // Button click handler
-            handler: () => {
-              console.log('Error handler')
-              // set new random value and move on
-              // this.updateGuessNumber();
-              // close
-              // this.$modal.hide("dialog");
-            }
-          }
-        ]
-      });
+      // this.overlayType = "is-modal-error";
+      // this.$modal.show("dialog", {
+      //   title: `Ops! Error`,
+      //   text: `You have done ${this.$store.state.answerWrong.counter} errors.`,
+      //   buttons: [
+      //     {
+      //       class: "btn btn-danger",
+      //       title: "Close and Try Again",
+      //       // Button click handler
+      //       handler: () => {
+      //         console.log('Error handler')
+      //         // set new random value and move on
+      //         // this.updateGuessNumber();
+      //         // close
+      //         // this.$modal.hide("dialog");
+      //       }
+      //     }
+      //   ]
+      // });
+
     },
 
     showModalGameOver() {
