@@ -3,9 +3,19 @@
 by Valerio Sillari
 
 
-## Task
+## Info
 
 A Roman Numerals Quiz.
+
+The user load a page where check his knowledge of the roman numbers.
+
+The page shows a number (a decimal number), and the user has to guess the equivalent of the roman number, filling the form with its answer.
+
+The application check if the answer is correct.
+
+The user has a max of 5 attempts.
+
+After 3 mistakes the game is over.
 
 
 ## General
@@ -59,4 +69,4 @@ You can change the range just changing one constant.
 
 - set prettier
 
-- set btn restart on gameOver and EndGame for better UX
+- set a button for restarting on gameOver and EndGame for better UX
