@@ -42,7 +42,9 @@ $ npm run generate
 
 
 # deploy on github pages
+# set branch "gh-page" on github deploy option (in settings)
 # https://hackernoon.com/create-and-publish-a-nuxt-powered-website-on-github-pages-3e922dfa7372
+# https://valeriosillari.github.io/roman-quiz-nuxt/
 $ yarn generate
 $ yarn deploy
 ```
