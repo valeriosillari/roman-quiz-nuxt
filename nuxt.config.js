@@ -64,5 +64,10 @@ module.exports = {
         });
       }
     }
-  }
+  },
+
+  router: {
+    base: '/roman-quiz-nuxt/'
+  },
+
 };
