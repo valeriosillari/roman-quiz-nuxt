@@ -142,56 +142,19 @@ export default {
     },
 
     showModalCorrectAnswer() {
-      this.overlayType = "is-modal-correct";
-      this.$modal.show("dialog", {
-        title: "oh YES!",
+      this.$modal.show('modal-feedback',{
+        feedbackClassname: 'is-modal-correct',
+        feedbackTitle: 'Yes !!!',
         text: `You have answered correctly <b>${this.$store.state.answerCorrect.counter}</b> questions.`,
-        buttons: [
-          {
-            class: "btn btn-success",
-            title: "Next number",
-            // Button click handler
-            handler: () => {
-              // set new random value and move on
-              this.updateGuessNumber();
-              // close
-              this.$modal.hide("dialog");
-            }
-          }
-        ]
-      });
+      })
     },
 
     showModalError() {
       this.$modal.show('modal-feedback',{
         feedbackClassname: 'is-modal-error',
-        feedbackTitle: 'ylo!!!!',
-        feedbackText: `You have done ${this.$store.state.answerWrong.counter} errors.`,
+        feedbackTitle: 'Ops !!!',
+        feedbackText: `You have done  <b>${this.$store.state.answerWrong.counter}</b> errors.`,
       })
-
-
-
-
-      // this.overlayType = "is-modal-error";
-      // this.$modal.show("dialog", {
-      //   title: `Ops! Error`,
-      //   text: `You have done ${this.$store.state.answerWrong.counter} errors.`,
-      //   buttons: [
-      //     {
-      //       class: "btn btn-danger",
-      //       title: "Close and Try Again",
-      //       // Button click handler
-      //       handler: () => {
-      //         console.log('Error handler')
-      //         // set new random value and move on
-      //         // this.updateGuessNumber();
-      //         // close
-      //         // this.$modal.hide("dialog");
-      //       }
-      //     }
-      //   ]
-      // });
-
     },
 
     showModalGameOver() {
