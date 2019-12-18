@@ -9,8 +9,7 @@
 
     //- form area
     form(
-      @submit='checkUserInput',
-      method="post"
+      @submit.prevent='checkUserInput',
     )
       .form-group
         label
@@ -22,7 +21,9 @@
           v-model="userNumber"
         )
 
-      button.btn.btn-primary(type='submit')
+      button.btn.btn-primary(
+        type='submit'
+      )
         | Check
 
 
