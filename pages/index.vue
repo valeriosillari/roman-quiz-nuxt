@@ -248,4 +248,13 @@ export default {
 
   &.is-modal-end-game
     background-color: green
+
+  .v--modal-box
+    padding: 15px
+    text-align: center
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+
 </style>
