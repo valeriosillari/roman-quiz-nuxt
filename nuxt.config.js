@@ -66,6 +66,7 @@ module.exports = {
     }
   },
 
+  // https://valeriosillari.github.io/roman-quiz-nuxt/
   router: {
     base: '/roman-quiz-nuxt/'
   },

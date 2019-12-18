@@ -40,6 +40,7 @@ $ npm start
 # generate static project
 $ npm run generate
 
+
 # deploy on github pages
 # https://hackernoon.com/create-and-publish-a-nuxt-powered-website-on-github-pages-3e922dfa7372
 $ yarn generate
