@@ -63,4 +63,4 @@ You can change the range just changing one constant.
 
 - set prettier
 
-- set more abstract logic for modals (not dialog maybe)
+- set btn restart on gameOver and EndGame for better UX
