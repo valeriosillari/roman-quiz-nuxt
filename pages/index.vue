@@ -38,7 +38,8 @@
     modal(
       name='modal-feedback'
       :class='feedbackClassname'
-      @before-open="beforeOpen"
+      @before-open='overlayBeforeOpen'
+      @before-close='overlayBeforeClose'
     )
       h1
         | {{ feedbackTitle }}
@@ -74,10 +75,15 @@ export default {
   },
 
   methods: {
-    beforeOpen (event) {
+    overlayBeforeOpen (event) {
       this.feedbackClassname = event.params.feedbackClassname
       this.feedbackTitle = event.params.feedbackTitle
       this.feedbackText = event.params.feedbackText
+    },
+
+    overlayBeforeClose () {
+      // set new random value and move on
+      this.updateGuessNumber();
     },
 
     resetCounter() {
