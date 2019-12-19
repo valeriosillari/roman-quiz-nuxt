@@ -68,6 +68,6 @@ You can change the range just changing one constant.
 
 ## TODOs
 
-- set prettier
+- set prettier at autoSave (guess issue with vue + lint + prettier). to check.
 
 - set modal separate component
