@@ -301,7 +301,4 @@ export default {
 
   &.is-modal-end-game
     background-color: green
-
-
-
 </style>

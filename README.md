@@ -70,4 +70,4 @@ You can change the range just changing one constant.
 
 - set prettier
 
-- set a button for restarting on gameOver and EndGame for better UX
+- set modal separate component
