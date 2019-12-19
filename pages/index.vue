@@ -37,6 +37,7 @@
     modal(
       name='modal-feedback'
       :class='feedbackClassname'
+      :adaptive='true'
       :clickToClose='false'
       @before-open='overlayBeforeOpen'
       @before-close='overlayBeforeClose'
