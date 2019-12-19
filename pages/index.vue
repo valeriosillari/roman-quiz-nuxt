@@ -64,11 +64,11 @@
 </template>
 
 <script>
-const RANDOM_NUMBER_START = 1;
-const MAX_ERRORS_ALOUD = 3;
-const MAX_ANSWERS = 5;
+const RANDOM_NUMBER_START = 1
+const MAX_ERRORS_ALOUD = 3
+const MAX_ANSWERS = 5
 // TODO: here max value. 10 set for easy develoing mode
-const RANDOM_NUMBER_END = 10;
+const RANDOM_NUMBER_END = 10
 
 export default {
   data() {
@@ -85,55 +85,54 @@ export default {
       isLayerRestart: false,
       feedbackClassname: false,
       feedbackTitle: false,
-      feedbackText: 'mon',
-
-    };
+      feedbackText: "mon"
+    }
   },
 
   methods: {
     removeModal() {
       this.isLayerFeedback = false
       this.isLayerRestart = false
-      this.$modal.hide('modal-feedback')
+      this.$modal.hide("modal-feedback")
     },
 
     restartGame() {
       this.resetCounter()
       this.removeModal()
-      console.log('RESTART Game')
+      console.log("RESTART Game")
     },
 
-    overlayBeforeOpen (event) {
+    overlayBeforeOpen(event) {
       this.feedbackClassname = event.params.feedbackClassname
       this.feedbackTitle = event.params.feedbackTitle
       this.feedbackText = event.params.feedbackText
     },
 
-    overlayBeforeClose () {
+    overlayBeforeClose() {
       // set new random value and move on
-      this.updateGuessNumber();
+      this.updateGuessNumber()
     },
 
     resetCounter() {
-      this.$store.commit("answerCorrect/reset");
-      this.$store.commit("answerWrong/reset");
-      console.log('RESET counter')
+      this.$store.commit("answerCorrect/reset")
+      this.$store.commit("answerWrong/reset")
+      console.log("RESET counter")
     },
 
     updateGuessNumber() {
       // clean input field
-      this.userNumber = null;
+      this.userNumber = null
       // new number to guess
       this.randomNumber = this.getRandomNumber(
         RANDOM_NUMBER_START,
         RANDOM_NUMBER_END
-      );
+      )
     },
 
     getRandomNumber: (min, max) => {
-      min = Math.ceil(min);
-      max = Math.floor(max);
-      return Math.floor(Math.random() * (max - min + 1)) + min;
+      min = Math.ceil(min)
+      max = Math.floor(max)
+      return Math.floor(Math.random() * (max - min + 1)) + min
     },
 
     // inspired by
@@ -158,99 +157,99 @@ export default {
           I: 1
         },
         num = 0,
-        m;
+        m
 
       if (!validator.test(str)) {
         // no digit in the input filed. return a feedback message to the user
         // not counted as error
-        return false;
+        return false
       }
 
-      while ((m = token.exec(str))) num += key[m[0]];
-      return num;
+      while ((m = token.exec(str))) num += key[m[0]]
+      return num
     },
 
     showModalCorrectAnswer() {
       this.isLayerFeedback = true
-      this.$modal.show('modal-feedback',{
-        feedbackClassname: 'is-modal-correct',
-        feedbackTitle: 'Yes !!!',
-        feedbackText: `You have answered correctly <b>${this.$store.state.answerCorrect.counter}</b> questions.`,
+      this.$modal.show("modal-feedback", {
+        feedbackClassname: "is-modal-correct",
+        feedbackTitle: "Yes !!!",
+        feedbackText: `You have answered correctly <b>${this.$store.state.answerCorrect.counter}</b> questions.`
       })
     },
 
     showModalError() {
       this.isLayerFeedback = true
-      this.$modal.show('modal-feedback',{
-        feedbackClassname: 'is-modal-error',
-        feedbackTitle: 'Ops !!!',
-        feedbackText: `You have done  <b>${this.$store.state.answerWrong.counter}</b> errors.`,
+      this.$modal.show("modal-feedback", {
+        feedbackClassname: "is-modal-error",
+        feedbackTitle: "Ops !!!",
+        feedbackText: `You have done  <b>${this.$store.state.answerWrong.counter}</b> errors.`
       })
     },
 
     showModalGameOver() {
       this.isLayerRestart = true
-      this.$modal.show('modal-feedback',{
-        feedbackClassname: 'is-modal-game-over',
+      this.$modal.show("modal-feedback", {
+        feedbackClassname: "is-modal-game-over",
         feedbackTitle: `Ouch! <b>${MAX_ERRORS_ALOUD}</b> errors.`,
-        feedbackText: 'You have done  too many errors. Game Over.',
+        feedbackText: "You have done  too many errors. Game Over."
       })
       // reset game counter
-      this.resetCounter();
+      this.resetCounter()
     },
 
     showModalEndGame() {
       this.isLayerRestart = true
-      this.$modal.show('modal-feedback',{
-        feedbackClassname: 'is-modal-end-game',
-        feedbackTitle: 'Good try!',
-        feedbackText: `You have answered correctly <b>${this.$store.state.answerCorrect.counter}</b> of <b>${MAX_ANSWERS}</b> questions!`,
+      this.$modal.show("modal-feedback", {
+        feedbackClassname: "is-modal-end-game",
+        feedbackTitle: "Good try!",
+        feedbackText: `You have answered correctly <b>${this.$store.state.answerCorrect.counter}</b> of <b>${MAX_ANSWERS}</b> questions!`
       })
       // reset game counter
-      this.resetCounter();
+      this.resetCounter()
     },
 
     checkUserInput() {
       // reset feedback messages status
-      this.isInputEmpty = false;
-      this.isInputWrong = false;
-      this.isInputCorrect = false;
+      this.isInputEmpty = false
+      this.isInputWrong = false
+      this.isInputCorrect = false
 
       // no input digit >> no start, feedback messagge
       // user has to write something ...
       if (!this.userNumber) {
-        this.isInputEmpty = true;
-        return false;
+        this.isInputEmpty = true
+        return false
       }
 
       if (this.converter(this.userNumber) === this.randomNumber) {
-        this.isInputCorrect = true;
-        this.$store.commit("answerCorrect/increment");
+        this.isInputCorrect = true
+        this.$store.commit("answerCorrect/increment")
       } else {
-        this.isInputWrong = true;
-        this.$store.commit("answerWrong/increment");
+        this.isInputWrong = true
+        this.$store.commit("answerWrong/increment")
       }
 
-      console.log("=================");
-      console.log(`good are: ${this.$store.state.answerCorrect.counter}`);
-      console.log(`wrong are: ${this.$store.state.answerWrong.counter}`);
+      console.log("=================")
+      console.log(`good are: ${this.$store.state.answerCorrect.counter}`)
+      console.log(`wrong are: ${this.$store.state.answerWrong.counter}`)
 
       if (this.$store.state.answerWrong.counter === MAX_ERRORS_ALOUD) {
-        this.showModalGameOver();
+        this.showModalGameOver()
       } else if (
         this.$store.state.answerCorrect.counter +
           this.$store.state.answerWrong.counter ===
         MAX_ANSWERS
       ) {
-        this.showModalEndGame();
+        this.showModalEndGame()
       } else if (this.isInputWrong) {
-        this.showModalError();
+        this.showModalError()
       } else {
-        this.showModalCorrectAnswer();
+        this.showModalCorrectAnswer()
       }
     }
   }
-};
+}
 </script>
 
 <style lang="sass">
