@@ -46,23 +46,7 @@ module.exports = {
     /*
      ** Run ESLint on save
      */
-    extend(config, { isDev, isClient }) {
-      config.module.rules.forEach(rule => {
-        // add to ALL vue modules the sass file 'global'
-        if (rule.test.toString() === "/\\.vue$/") {
-          rule.options.loaders.sass[2].options.data =
-            '@import "./assets/stylesheets/global"';
-        }
-      });
-
-      if (isDev && process.client) {
-        config.module.rules.push({
-          enforce: "pre",
-          test: /\.(js|vue)$/,
-          loader: "eslint-loader",
-          exclude: /(node_modules)/
-        });
-      }
+    extend(config, {}) {
     }
   },
 
