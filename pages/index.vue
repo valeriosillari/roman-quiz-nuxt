@@ -34,10 +34,10 @@
       )
         | Please insert some values in the input field
 
-    //- v-dialog(v-bind:click-to-close="true":class='overlayType')
     modal(
       name='modal-feedback'
       :class='feedbackClassname'
+      :clickToClose='false'
       @before-open='overlayBeforeOpen'
       @before-close='overlayBeforeClose'
     )
@@ -47,6 +47,20 @@
       p(
         v-html='feedbackText'
       )
+
+      button.btn.btn-outline-secondary(
+        type='button'
+        @click.prevent='removeModal',
+        v-if='isLayerFeedback'
+      )
+        | Next number
+
+      button.btn.btn-outline-light(
+        type='button'
+        @click.prevent='restartGame',
+        v-if='isLayerRestart'
+      )
+        | Restart
 </template>
 
 <script>
@@ -67,8 +81,8 @@ export default {
       isInputWrong: false,
       isInputCorrect: false,
       userNumber: null,
-      overlayType: false,
-
+      isLayerFeedback: false,
+      isLayerRestart: false,
       feedbackClassname: false,
       feedbackTitle: false,
       feedbackText: 'mon',
@@ -77,6 +91,18 @@ export default {
   },
 
   methods: {
+    removeModal() {
+      this.isLayerFeedback = false
+      this.isLayerRestart = false
+      this.$modal.hide('modal-feedback')
+    },
+
+    restartGame() {
+      this.resetCounter()
+      this.removeModal()
+      console.log('RESTART Game')
+    },
+
     overlayBeforeOpen (event) {
       this.feedbackClassname = event.params.feedbackClassname
       this.feedbackTitle = event.params.feedbackTitle
@@ -145,6 +171,7 @@ export default {
     },
 
     showModalCorrectAnswer() {
+      this.isLayerFeedback = true
       this.$modal.show('modal-feedback',{
         feedbackClassname: 'is-modal-correct',
         feedbackTitle: 'Yes !!!',
@@ -153,6 +180,7 @@ export default {
     },
 
     showModalError() {
+      this.isLayerFeedback = true
       this.$modal.show('modal-feedback',{
         feedbackClassname: 'is-modal-error',
         feedbackTitle: 'Ops !!!',
@@ -161,6 +189,7 @@ export default {
     },
 
     showModalGameOver() {
+      this.isLayerRestart = true
       this.$modal.show('modal-feedback',{
         feedbackClassname: 'is-modal-game-over',
         feedbackTitle: `Ouch! <b>${MAX_ERRORS_ALOUD}</b> errors.`,
@@ -171,6 +200,7 @@ export default {
     },
 
     showModalEndGame() {
+      this.isLayerRestart = true
       this.$modal.show('modal-feedback',{
         feedbackClassname: 'is-modal-end-game',
         feedbackTitle: 'Good try!',
