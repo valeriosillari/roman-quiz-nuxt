@@ -230,7 +230,7 @@ export default {
         this.$store.commit("answerWrong/increment")
       }
 
-      console.log("=================")
+      console.log("==============")
       console.log(`good are: ${this.$store.state.answerCorrect.counter}`)
       console.log(`wrong are: ${this.$store.state.answerWrong.counter}`)
 
