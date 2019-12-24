@@ -86,7 +86,7 @@ export default {
       isLayerRestart: false,
       feedbackClassname: false,
       feedbackTitle: false,
-      feedbackText: "mon"
+      feedbackText: 'mon',
     }
   },
 
@@ -94,13 +94,13 @@ export default {
     removeModal() {
       this.isLayerFeedback = false
       this.isLayerRestart = false
-      this.$modal.hide("modal-feedback")
+      this.$modal.hide('modal-feedback')
     },
 
     restartGame() {
       this.resetCounter()
       this.removeModal()
-      console.log("RESTART Game")
+      console.log('RESTART Game')
     },
 
     overlayBeforeOpen(event) {
@@ -115,9 +115,9 @@ export default {
     },
 
     resetCounter() {
-      this.$store.commit("answerCorrect/reset")
-      this.$store.commit("answerWrong/reset")
-      console.log("RESET counter")
+      this.$store.commit('answerCorrect/reset')
+      this.$store.commit('answerWrong/reset')
+      console.log('RESET counter')
     },
 
     updateGuessNumber() {
@@ -155,7 +155,7 @@ export default {
           IX: 9,
           V: 5,
           IV: 4,
-          I: 1
+          I: 1,
         },
         num = 0,
         m
@@ -172,28 +172,28 @@ export default {
 
     showModalCorrectAnswer() {
       this.isLayerFeedback = true
-      this.$modal.show("modal-feedback", {
-        feedbackClassname: "is-modal-correct",
-        feedbackTitle: "Yes !!!",
-        feedbackText: `You have answered correctly <b>${this.$store.state.answerCorrect.counter}</b> questions.`
+      this.$modal.show('modal-feedback', {
+        feedbackClassname: 'is-modal-correct',
+        feedbackTitle: 'Yes !!!',
+        feedbackText: `You have answered correctly <b>${this.$store.state.answerCorrect.counter}</b> questions.`,
       })
     },
 
     showModalError() {
       this.isLayerFeedback = true
-      this.$modal.show("modal-feedback", {
-        feedbackClassname: "is-modal-error",
-        feedbackTitle: "Ops !!!",
-        feedbackText: `You have done  <b>${this.$store.state.answerWrong.counter}</b> errors.`
+      this.$modal.show('modal-feedback', {
+        feedbackClassname: 'is-modal-error',
+        feedbackTitle: 'Ops !!!',
+        feedbackText: `You have done  <b>${this.$store.state.answerWrong.counter}</b> errors.`,
       })
     },
 
     showModalGameOver() {
       this.isLayerRestart = true
-      this.$modal.show("modal-feedback", {
-        feedbackClassname: "is-modal-game-over",
+      this.$modal.show('modal-feedback', {
+        feedbackClassname: 'is-modal-game-over',
         feedbackTitle: `Ouch! <b>${MAX_ERRORS_ALOUD}</b> errors.`,
-        feedbackText: "You have done  too many errors. Game Over."
+        feedbackText: 'You have done  too many errors. Game Over.',
       })
       // reset game counter
       this.resetCounter()
@@ -201,10 +201,10 @@ export default {
 
     showModalEndGame() {
       this.isLayerRestart = true
-      this.$modal.show("modal-feedback", {
-        feedbackClassname: "is-modal-end-game",
-        feedbackTitle: "Good try!",
-        feedbackText: `You have answered correctly <b>${this.$store.state.answerCorrect.counter}</b> of <b>${MAX_ANSWERS}</b> questions!`
+      this.$modal.show('modal-feedback', {
+        feedbackClassname: 'is-modal-end-game',
+        feedbackTitle: 'Good try!',
+        feedbackText: `You have answered correctly <b>${this.$store.state.answerCorrect.counter}</b> of <b>${MAX_ANSWERS}</b> questions!`,
       })
       // reset game counter
       this.resetCounter()
@@ -225,13 +225,13 @@ export default {
 
       if (this.converter(this.userNumber) === this.randomNumber) {
         this.isInputCorrect = true
-        this.$store.commit("answerCorrect/increment")
+        this.$store.commit('answerCorrect/increment')
       } else {
         this.isInputWrong = true
-        this.$store.commit("answerWrong/increment")
+        this.$store.commit('answerWrong/increment')
       }
 
-      console.log("==============")
+      console.log('==============')
       console.log(`good are: ${this.$store.state.answerCorrect.counter}`)
       console.log(`wrong are: ${this.$store.state.answerWrong.counter}`)
 
@@ -248,8 +248,8 @@ export default {
       } else {
         this.showModalCorrectAnswer()
       }
-    }
-  }
+    },
+  },
 }
 </script>
 
