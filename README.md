@@ -18,13 +18,11 @@ The user has a max of 5 attempts.
 
 After 3 mistakes the game is over.
 
-
 ## General
 
 Set application with VueJS, especially with [Nuxt.js](https://github.com/nuxt/nuxt.js)
 
 For detailed explanation on how things work, checkout the [Nuxt.js docs](https://github.com/nuxt/nuxt.js).
-
 
 ## Tech Stacks
 
@@ -33,7 +31,6 @@ For detailed explanation on how things work, checkout the [Nuxt.js docs](https:/
 - [Pug Lang](https://pugjs.org/)
 
 - [Sass Lang](https://sass-lang.com//)
-
 
 ## Build Setup
 
@@ -56,7 +53,6 @@ $ npm run generate
 $ yarn deploy
 ```
 
-
 ## Notes
 
 I set some constant for setting the range for the random numbers to guess.
@@ -65,9 +61,6 @@ The system is set for arriving until 1000, but because is a game and should be f
 
 You can change the range just changing one constant.
 
-
 ## TODOs
-
-- set prettier at autoSave (guess issue with vue + lint + prettier). to check.
 
 - set modal separate component
